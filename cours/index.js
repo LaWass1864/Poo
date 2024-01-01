@@ -13,7 +13,7 @@ const obj = {
 obj["admin"] = false
 
 // Modifier un parametre
-obj.pseudo = "Wassou"e
+obj.pseudo = "Wassou"
 
 // Supprimer un parametre
 delete obj.ville;
