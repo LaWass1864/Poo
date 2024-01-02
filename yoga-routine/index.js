@@ -1,4 +1,4 @@
-const main = document.querySelector("main");
+const main = document.querySelector('main');
 // Variable qui va stocker tous nos exos
 let exerciceArray = [
   { pic: 0, min: 1 },
@@ -19,9 +19,9 @@ class Exercice {}
 // Fonctions utiles au projet
 const utils = {
   pageContent: function (title, content, btn) {
-    document.querySelector("h1").innerHTML = title;
+    document.querySelector('h1').innerHTML = title;
     main.innerHTML = content;
-    document.getElementsByClassName("btn-container").innerHTML = btn;;
+    document.querySelector('.btn-container').innerHTML = btn;;
   },
 };
 
@@ -30,9 +30,8 @@ const utils = {
 const page = {
   // Page de parametrage
   lobby: function () {
-      let mapArray = exerciceArray
-        .map(
-          (exo) =>
+      let mapArray = exerciceArray.map(
+          (exo) => 
           `
           <li>
             <div class="card-header">
@@ -43,10 +42,7 @@ const page = {
           `
         )
         .join("");
-  
-    // Vous pouvez maintenant utiliser la variable `mapArray` comme vous le souhaitez
-  
-      
+       
     utils.pageContent(
       "Paramétrage <i id='reboot' class='fa fa-undo'></i>",
       "<button id='start'>Commencer<i class='far fa-play-circle'></i></button>"
