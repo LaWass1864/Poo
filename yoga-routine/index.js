@@ -21,7 +21,7 @@ const utils = {
   pageContent: function (title, content, btn) {
     document.querySelector("h1").innerHTML = title;
     main.innerHTML = content;
-    document.querySelector(".btn-container").innerHTML = btn;
+    document.getElementsByClassName("btn-container").innerHTML = btn;;
   },
 };
 
@@ -30,9 +30,25 @@ const utils = {
 const page = {
   // Page de parametrage
   lobby: function () {
+      let mapArray = exerciceArray
+        .map(
+          (exo) =>
+          `
+          <li>
+            <div class="card-header">
+              <input type="number" id="${exo.pic}" min="1" max="10" value="${exo.min}">
+              <span>min</span>
+            </div>
+          </li>
+          `
+        )
+        .join("");
+  
+    // Vous pouvez maintenant utiliser la variable `mapArray` comme vous le souhaitez
+  
+      
     utils.pageContent(
       "Paramétrage <i id='reboot' class='fa fa-undo'></i>",
-      "Exercices",
       "<button id='start'>Commencer<i class='far fa-play-circle'></i></button>"
     );
   },
@@ -50,4 +66,4 @@ const page = {
   },
 };
 
-page.finish();
+page.lobby()
