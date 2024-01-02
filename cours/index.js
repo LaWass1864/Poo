@@ -1,4 +1,4 @@
-/* Le code crée une variable constante nommée `obj` et lui attribue un objet avec deux propriétés :`pseudo` avec une valeur de "Wass" et `ville` avec une valeur de "St-Denis". */
+/* Le code crée une variable constante nommée `obj` et lui attribue un objet avec deux propriétés :`pseudo` avec une valeur de "Wass" et ville` avec une valeur de "St-Denis". */
 const obj = {
   //index:value
   pseudo: "Wass",
@@ -58,6 +58,12 @@ console.log(fusion);
 
 // Empecher les modifications
 const newObj = Object.freeze(obj);
+/* `const newObj = Object.seal(obj)` scelle l'objet `obj`, ce qui signifie qu'il empêche l'ajout de nouvelles propriétés ou la suppression de propriétés existantes. Cependant, il permet toujours de
+modifier les propriétés existantes. L'objet scellé `newObj` est une version modifiée de `obj` avec
+ces restrictions appliquées. */
+const newObj1 = Object.seal(obj)
 newObj.pseudo = "Wassila"
 newObj.adress = "42 avenue du code"
 console.log(newObj);
+
+// Constructeur d'objet
