@@ -11,8 +11,7 @@ const obj = {
 };
 
 // Ajouter une valeur dans .obj
-/* `(obj.age = 24)` ajoute une nouvelle propriété `age` à l'objet `obj` et lui attribue une valeur de
-24. */
+/* `(obj.age = 24)` ajoute une nouvelle propriété `age` à l'objet `obj` et lui attribue une valeur de 24. */
 (obj.age = 24), 
 obj["admin"] = false
 
@@ -29,12 +28,13 @@ delete obj.ville;
 
 // Parcourir l'objet
 for (const key in obj) {
-    // console.log(key + " : " + obj[key]);
+    console.log(key + " : " + obj[key]);
 }
 // console.log(obj.direBonjour());
 
 // Méthodes natives dans JavaScript
 
+/* `const keys = Object.keys(obj)` est une méthode en JavaScript qui renvoie un tableau des noms de propriétés de l'objet. Dans ce cas, il renvoie un tableau des noms de propriétés de l'objet `obj` et l'affecte à la constante `keys`. */
 const keys = Object.keys(obj)
 console.log(keys);
 
