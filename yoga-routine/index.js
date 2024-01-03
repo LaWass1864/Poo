@@ -23,24 +23,40 @@ const utils = {
     main.innerHTML = content;
     document.querySelector(".btn-container").innerHTML = btn;
   },
-}
+  handleEventMinutes: function() {
+    document.querySelectorAll('input[type="number').forEach((input) => {
+      input.addEventListener('input', (e) => {
+        exerciceArray.map((exo) => {
+                  if(exo.pic == e.target.id) {
+            exo.min = parseInt(e.target.value)
+            console.log(exerciceArray);
+          }
+        });
+      });
+    });
+  },
+};
 //  Les pages : parametrages & routine & terminé
 // Page Commencer
 const page = {
   lobby: function () {
+    /* `let mapArray` crée un tableau d'éléments HTML à l'aide de la fonction `map`. Chaque élément du tableau représente un exercice et comprend l'image de l'exercice, un champ de saisie permettant
+    de définir la durée de l'exercice et des boutons permettant de parcourir et de supprimer l'exercice. */
     let mapArray = exerciceArray
       .map(
         (exo) =>
           `
+      
         <li>
           <div class="card-header">
             <input type="number" id=${exo.pic} min="1" max="10" value=${exo.min}>
             <span>min</span>
           </div>
-          <img src="./img/${exo.pic}.png" />
+          <img src="./img/${exo.pic}.png">
           <i class="fas fa-arrow-alt-circle-left arrow" data-pic=${exo.pic}></i>
           <i class="fas fa-times-circle deleteBtn" data-pic=${exo.pic}></i>
         </li>
+       
       `
       )
       .join("");
@@ -50,6 +66,10 @@ const page = {
       "<ul>" + mapArray + "</ul>",
       "<button id='start'>Commencer<i class='far fa-play-circle'></i></button>"
     );
+    /* `utils.handleEventMinutes();` appelle une fonction nommée `handleEventMinutes()` à partir de
+    l'objet `utils`. Cette fonction est chargée de gérer des événements liés aux champs de saisie
+    qui définissent la durée de chaque exercice. */
+    utils.handleEventMinutes();
   },
   // Page routine
   routine: function () {
@@ -66,3 +86,4 @@ const page = {
 };
 
 page.lobby()
+utils.handleEventMinutes()
