@@ -23,15 +23,54 @@ const utils = {
     main.innerHTML = content;
     document.querySelector(".btn-container").innerHTML = btn;
   },
-  handleEventMinutes: function() {
+
+  // Fonction minuteur
+  handleEventMinutes: function () {
     document.querySelectorAll('input[type="number').forEach((input) => {
-      input.addEventListener('input', (e) => {
+      input.addEventListener("input", (e) => {
         exerciceArray.map((exo) => {
-                  if(exo.pic == e.target.id) {
-            exo.min = parseInt(e.target.value)
+          if (exo.pic == e.target.id) {
+            exo.min = parseInt(e.target.value);
             console.log(exerciceArray);
           }
         });
+      });
+    });
+  },
+
+  // Fonction fleche
+  handleEventArrow: function () {
+    document.querySelectorAll(".arrow").forEach((arrow) => {
+      arrow.addEventListener("click", (e) => {
+        let position = 0;
+        exerciceArray.map((exo) => {
+          if (exo.pic == e.target.dataset.pic && position !== 0) {
+            [exerciceArray[position], exerciceArray[position - 1]] = [
+              exerciceArray[position - 1],
+              exerciceArray[position],
+            ];
+
+            page.lobby();
+          } else {
+            position++;
+          }
+        });
+      });
+    });
+  },
+
+  // Suppresion des items
+  deleteItem: function () {
+    document.querySelectorAll(".deleteBtn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        let newArr = [];
+        exerciceArray.map((exo) => {
+         if (exo.pic != e.target.dataset.pic) {
+          newArr.push(exo);
+         }
+        });
+        exerciceArray = newArr ;
+        console.log(exerciceArray);
       });
     });
   },
@@ -70,6 +109,8 @@ const page = {
     l'objet `utils`. Cette fonction est chargée de gérer des événements liés aux champs de saisie
     qui définissent la durée de chaque exercice. */
     utils.handleEventMinutes();
+    utils.handleEventArrow();
+    utils.deleteItem();
   },
   // Page routine
   routine: function () {
@@ -85,5 +126,4 @@ const page = {
   },
 };
 
-page.lobby()
-utils.handleEventMinutes()
+page.lobby();
