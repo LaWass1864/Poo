@@ -1,6 +1,6 @@
 const main = document.querySelector('main');
 // Variable qui va stocker tous nos exos
-let exerciceArray = [
+const exerciceArray = [
   { pic: 0, min: 1 },
   { pic: 1, min: 1 },
   { pic: 2, min: 1 },
@@ -19,11 +19,10 @@ class Exercice {}
 // Fonctions utiles au projet
 const utils = {
   pageContent: function (title, content, btn) {
-    document.querySelector('h1').innerHTML = title;
+    document.querySelector("h1").innerHTML = title;
     main.innerHTML = content;
-    document.querySelector('.btn-container').innerHTML = btn;;
+    document.querySelector(".btn-container").innerHTML = btn;
   },
-};
 
 //  Les pages : parametrages & routine & terminé
 // Page Commencer
