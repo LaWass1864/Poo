@@ -1,4 +1,4 @@
-const main = document.querySelector('main');
+const main = document.querySelector("main");
 // Variable qui va stocker tous nos exos
 const exerciceArray = [
   { pic: 0, min: 1 },
@@ -27,23 +27,27 @@ const utils = {
 //  Les pages : parametrages & routine & terminé
 // Page Commencer
 const page = {
-  // Page de parametrage
   lobby: function () {
-      let mapArray = exerciceArray.map(
-          (exo) => 
+    let mapArray = exerciceArray
+      .map(
+        (exo) =>
           `
-          <li>
-            <div class="card-header">
-              <input type="number" id="${exo.pic}" min="1" max="10" value="${exo.min}">
-              <span>min</span>
-            </div>
-          </li>
-          `
-        )
-        .join("");
-       
+        <li>
+          <div class="card-header">
+            <input type="number" id=${exo.pic} min="1" max="10" value=${exo.min}>
+            <span>min</span>
+          </div>
+          <img src="./img/${exo.pic}.png" />
+          <i class="fas fa-arrow-alt-circle-left arrow" data-pic=${exo.pic}></i>
+          <i class="fas fa-times-circle deleteBtn" data-pic=${exo.pic}></i>
+        </li>
+      `
+      )
+      .join("");
+
     utils.pageContent(
       "Paramétrage <i id='reboot' class='fa fa-undo'></i>",
+      "<ul>" + mapArray + "</ul>",
       "<button id='start'>Commencer<i class='far fa-play-circle'></i></button>"
     );
   },
@@ -54,7 +58,7 @@ const page = {
   // Page términé
   finish: function () {
     utils.pageContent(
-      "C'est términe !",
+      "C'est términé !",
       "<button id='start'>Recommencer</button>",
       "<button id='reboot' class='btn-reboot'> Réinitialiser <i class='fas fa-times-circle'></i></button>"
     );
