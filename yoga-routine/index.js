@@ -1,6 +1,5 @@
 const main = document.querySelector("main");
-// Variable qui va stocker tous nos exos
-const exerciceArray = [
+const basicArray = [
   { pic: 0, min: 1 },
   { pic: 1, min: 1 },
   { pic: 2, min: 1 },
@@ -12,6 +11,17 @@ const exerciceArray = [
   { pic: 8, min: 1 },
   { pic: 9, min: 1 },
 ];
+// Variable qui va stocker tous nos exos
+let exerciceArray = [];
+  
+  // stored exercices array avec une fonction anonyme et se lance qu'une seule fois
+(() => {
+  if (localStorage.exercices) {
+    exerciceArray = localStorage.exercices;
+  } else {
+    exerciceArray = basicArray;
+  }
+})();
 
 // Class qui va lancer le minutage du chrono
 class Exercice {}
@@ -26,19 +36,19 @@ const utils = {
 
   // Fonction minuteur
   handleEventMinutes: function () {
-    document.querySelectorAll('input[type="number').forEach((input) => {
+    document.querySelectorAll('input[type="number"]').forEach((input) => {
       input.addEventListener("input", (e) => {
         exerciceArray.map((exo) => {
           if (exo.pic == e.target.id) {
             exo.min = parseInt(e.target.value);
-            console.log(exerciceArray);
+            this.store();
           }
         });
       });
     });
   },
 
-  // Fonction fleche
+  // Fonction fléchée
   handleEventArrow: function () {
     document.querySelectorAll(".arrow").forEach((arrow) => {
       arrow.addEventListener("click", (e) => {
@@ -49,8 +59,8 @@ const utils = {
               exerciceArray[position - 1],
               exerciceArray[position],
             ];
-
             page.lobby();
+            this.store();
           } else {
             position++;
           }
@@ -59,43 +69,50 @@ const utils = {
     });
   },
 
-  // Suppresion des items
+  // Suppression des items
   deleteItem: function () {
     document.querySelectorAll(".deleteBtn").forEach((btn) => {
       btn.addEventListener("click", (e) => {
         let newArr = [];
         exerciceArray.map((exo) => {
-         if (exo.pic != e.target.dataset.pic) {
-          newArr.push(exo);
-         }
+          if (exo.pic != e.target.dataset.pic) {
+            newArr.push(exo);
+          }
         });
-        exerciceArray = newArr ;
-        console.log(exerciceArray);
+        exerciceArray = newArr;
+        page.lobby();
+        this.store();
       });
     });
+  },
+
+  reboot: function () {
+    exerciceArray = basicArray;
+    page.lobby();
+    this.store();
+  },
+
+  store: function () {
+    localStorage.exercices = exerciceArray;
   },
 };
 //  Les pages : parametrages & routine & terminé
 // Page Commencer
 const page = {
   lobby: function () {
-    /* `let mapArray` crée un tableau d'éléments HTML à l'aide de la fonction `map`. Chaque élément du tableau représente un exercice et comprend l'image de l'exercice, un champ de saisie permettant
-    de définir la durée de l'exercice et des boutons permettant de parcourir et de supprimer l'exercice. */
     let mapArray = exerciceArray
       .map(
         (exo) =>
           `
-      
         <li>
           <div class="card-header">
             <input type="number" id=${exo.pic} min="1" max="10" value=${exo.min}>
             <span>min</span>
           </div>
-          <img src="./img/${exo.pic}.png">
+          <img src="./img/${exo.pic}.png" />
           <i class="fas fa-arrow-alt-circle-left arrow" data-pic=${exo.pic}></i>
           <i class="fas fa-times-circle deleteBtn" data-pic=${exo.pic}></i>
         </li>
-       
       `
       )
       .join("");
@@ -111,6 +128,7 @@ const page = {
     utils.handleEventMinutes();
     utils.handleEventArrow();
     utils.deleteItem();
+    reboot.addEventListener("click", () => utils.reboot());
   },
   // Page routine
   routine: function () {
@@ -125,5 +143,5 @@ const page = {
     );
   },
 };
-
 page.lobby();
+
