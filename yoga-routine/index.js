@@ -23,7 +23,7 @@ const utils = {
     main.innerHTML = content;
     document.querySelector(".btn-container").innerHTML = btn;
   },
-
+}
 //  Les pages : parametrages & routine & terminé
 // Page Commencer
 const page = {
