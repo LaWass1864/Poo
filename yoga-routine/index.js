@@ -15,13 +15,13 @@ const basicArray = [
 let exerciceArray = [];
   
   // stored exercices array avec une fonction anonyme et se lance qu'une seule fois
-(() => {
-  if (localStorage.exercices) {
-    exerciceArray = localStorage.exercices;
-  } else {
-    exerciceArray = basicArray;
-  }
-})();
+  (() => {
+    if (localStorage.exercices) {
+     (localStorage.exercices);
+    } else {
+      exerciceArray = basicArray;
+    }
+  })();
 
 // Class qui va lancer le minutage du chrono
 class Exercice {}
@@ -96,8 +96,8 @@ const utils = {
     localStorage.exercices = exerciceArray;
   },
 };
-//  Les pages : parametrages & routine & terminé
-// Page Commencer
+//  Les pages : Parametrages & routine & terminé
+//  Page Commencé
 const page = {
   lobby: function () {
     let mapArray = exerciceArray
