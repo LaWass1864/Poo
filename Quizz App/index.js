@@ -63,30 +63,40 @@ const display = {
   question: function () {
     this.elementShown("question", quiz.getCurrentQuestion().text);
   },
-
   choices: function () {
     let choices = quiz.getCurrentQuestion().choices;
-
     guessHandler = (id, guess) => {
       document.getElementById(id).onclick = function () {
         quiz.guess(guess);
         quizzApp();
       };
+      }
+      // Affichage du choix + prise en compte du choix
       for (let i = 0; i < choices.length; i++) {
         this.elementShown("choice" + i, choices[i]);
-      }
+        guessHandler('guess' + i, choices[i])
     };
   },
+  progress: function() {
+    this.elementShown("progress", `Question ${quiz.currentQuestionIndex + 1} sur  ${quiz.questions.length}`
+    );
+  },
+  endQuiz: function() {
+    let endQuizHTML = `
+    <h1> Quiz terminé </h1>
+    <h3> Votre Score est de  : ${quiz.score} / ${quiz.questions.length}</h3>
+    `
+    this.elementShown('quiz', endQuizHTML)
+  }
 };
-// Affichage choix + la prise en compte du choix
-
 // Game Logic
 quizzApp = () => {
   if (quiz.hasEnded()) {
-    // Ecran de fin
+    display.endQuiz()
   } else {
     display.question();
     display.choices();
+    display.progress();
   }
 };
 
